@@ -16,12 +16,12 @@ contract Escrow {
     agent = msg.sender;
   }
 
-  function deposit(address payee) payable {
+  function deposit(address payee) public onlyAgent payable {
     uint amount = msg.value;
 
-    deposits[payee] = deposits[payee] + amount;
+    deposits[payee] = deposits[payee] + amount;  // Change to SafeMath.
   }
-  function withdraw(address payable payee) public {
+  function withdraw(address payable payee) public onlyAgent {
     uint payment = deposits[payee];
 
     deposits[payee] = 0;
