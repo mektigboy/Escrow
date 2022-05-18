@@ -7,6 +7,11 @@ contract Escrow {
 
   mapping(address => uint) public deposits;
 
+  modifier onlyAgent() {
+    require(msg.sender == agent);
+    _;
+  }
+
   constructor () public {
     agent = msg.sender;
   }
